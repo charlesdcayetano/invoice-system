@@ -1,4 +1,5 @@
-@extends('layout')
+@extends('layouts.layout')
+
 
 @section('content')
 <h1>Create Invoice</h1>
@@ -13,8 +14,15 @@
 </div>
 @endif
 
+<form method="GET" action="{{ route('products.index') }}" class="mb-4">
+    <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products" class="border p-2 rounded" />
+    <button type="submit" class="bg-blue-600 text-white px-3 py-2 rounded">Search</button>
+</form>
+
+
 <form method="POST" action="{{ route('invoices.store') }}">
     @csrf
+
 
     <div class="mb-3">
         <label for="client_id" class="form-label">Client</label>
@@ -74,6 +82,8 @@
     <button type="submit" class="btn btn-primary">Save Invoice</button>
 </form>
 
+
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const addItemBtn = document.getElementById('add-item-btn');
@@ -125,5 +135,6 @@
     });
 </script>
 @endsection
+{{ $products->links() }}
 @extends('layouts.layout')
 @section('content')

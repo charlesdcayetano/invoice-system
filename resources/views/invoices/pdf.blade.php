@@ -41,3 +41,4 @@
     <h3>Total: ${{ number_format($invoice->total, 2) }}</h3>
 </body>
 </html>
+{{ $products->links() }}

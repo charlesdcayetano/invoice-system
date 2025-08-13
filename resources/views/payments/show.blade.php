@@ -5,6 +5,12 @@
     <button type="submit" class="btn btn-primary">Send Invoice Email</button>
 </form>
 
+<form method="GET" action="{{ route('products.index') }}" class="mb-4">
+    <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products" class="border p-2 rounded" />
+    <button type="submit" class="bg-blue-600 text-white px-3 py-2 rounded">Search</button>
+</form>
+
+
 @if($invoice->payments->count())
 <h3>Payments:</h3>
 <table class="table table-bordered">
@@ -23,5 +29,7 @@
 </table>
 @endif
 @section('scripts')
+{{ $products->links() }}
+
 <script>
     

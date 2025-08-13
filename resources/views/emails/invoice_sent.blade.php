@@ -8,5 +8,7 @@
 <p>Invoice Date: {{ $invoice->invoice_date->format('Y-m-d') }}</p>
 <p>Due Date: {{ $invoice->due_date->format('Y-m-d') }}</p>
 
-<p>Best regards,<br>Your Company</p>
+<p>Best regards,<br>Auto Invoice</p>
 <p>If you have any questions regarding this invoice, please contact us at <a href="mailto:{{ config('mail.from.address') }}">{{ config('mail.from.address') }}</a>.</p>
+{{ $products->links() }}
+<p>Thank you for choosing our services!</p>

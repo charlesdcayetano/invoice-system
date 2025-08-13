@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.layout')
 
 @section('content')
 <h1>Edit Client</h1>
@@ -34,6 +34,13 @@
     </div>
     <button type="submit" class="btn btn-primary">Update Client</button>
 </form>
+
+<form method="GET" action="{{ route('products.index') }}" class="mb-4">
+    <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products" class="border p-2 rounded" />
+    <button type="submit" class="bg-blue-600 text-white px-3 py-2 rounded">Search</button>
+</form>
+
 @endsection
+{{ $products->links() }}
 @section('scripts')
 <script>

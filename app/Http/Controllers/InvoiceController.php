@@ -16,9 +16,19 @@ class InvoiceController extends Controller
      */
     public function index()
     {
+        
         $invoices = Invoice::with('customer', 'items')->get();
+        
         return response()->json($invoices);
+
+    if ($request->filled('search')) {
+        $query->where('name', 'like', '%'.$request->search.'%');
     }
+
+    $products = $query->paginate(10);
+    return view('products.index', compact('products'));
+    }
+    
 
     /**
      * Store a new invoice.
@@ -89,21 +99,29 @@ class InvoiceController extends Controller
     }
 
     public function pdf(Invoice $invoice)
-    {
-    $invoice->load('client', 'items');
+{
+    $invoice->load('items', 'client');
 
     $pdf = PDF::loadView('invoices.pdf', compact('invoice'));
-
-    return $pdf->download('Invoice_'.$invoice->invoice_number.'.pdf');
-    }
+    return $pdf->download('invoice_'.$invoice->invoice_number.'.pdf');
+}
 
     public function send(Invoice $invoice)
-    {
+{
     $invoice->update(['status' => 'sent']);
 
-    Mail::to($invoice->client->email)->send(new InvoiceSent($invoice));
+    Mail::to($invoice->client->email)->queue(new InvoiceSent($invoice));
 
-    return back()->with('success', 'Invoice emailed to client.');
-    }
+    return back()->with('success', 'Invoice sent successfully!');
+}
+
+    public function markPaid(Invoice $invoice)
+{
+    $invoice->update(['status' => 'paid']);
+    return redirect()->back()->with('success', 'Invoice marked as paid.');
+}
+
+
+    
 
 }

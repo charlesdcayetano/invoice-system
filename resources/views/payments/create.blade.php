@@ -1,7 +1,15 @@
-@extends('layout')
+@extends('layouts.layout')
+
 
 @section('content')
 <h1>Record Payment for Invoice #{{ $invoice->invoice_number }}</h1>
+
+
+<form method="GET" action="{{ route('products.index') }}" class="mb-4">
+    <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products" class="border p-2 rounded" />
+    <button type="submit" class="bg-blue-600 text-white px-3 py-2 rounded">Search</button>
+</form>
+
 
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -31,4 +39,6 @@
     <button type="submit" class="btn btn-primary">Record Payment</button>
 </form>
 @endsection
+{{ $products->links() }}
+
 @section('scripts')

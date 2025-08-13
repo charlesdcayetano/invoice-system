@@ -14,10 +14,12 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function index()
-{
-    $products = Product::all();
+    {
+    $products = Product::paginate(10); // 10 per page
     return view('products.index', compact('products'));
-}
+    }
+
+
 
 public function store(Request $request)
 {

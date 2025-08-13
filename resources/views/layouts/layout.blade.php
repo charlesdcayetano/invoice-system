@@ -2,6 +2,12 @@
 <html>
 <head>
     <title>Auto Invoice System</title>
+
+    <form method="GET" action="{{ route('products.index') }}" class="mb-4">
+    <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products" class="border p-2 rounded" />
+    <button type="submit" class="bg-blue-600 text-white px-3 py-2 rounded">Search</button>
+</form>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -22,3 +28,5 @@
     </div>
 </body>
 </html>
+{{ $products->links() }}
+

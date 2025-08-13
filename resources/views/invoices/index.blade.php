@@ -1,7 +1,14 @@
-@extends('layout')
+@extends('layouts.layout')
+
 
 @section('content')
 <h1>Invoices</h1>
+
+<form method="GET" action="{{ route('products.index') }}" class="mb-4">
+    <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products" class="border p-2 rounded" />
+    <button type="submit" class="bg-blue-600 text-white px-3 py-2 rounded">Search</button>
+</form>
+
 
 <a href="{{ route('invoices.create') }}" class="btn btn-primary mb-3">Create New Invoice</a>
 
@@ -42,4 +49,6 @@
 </table>
 @endsection
 @extends('layouts.layout')
+{{ $products->links() }}
+
 @section('content')

@@ -1,4 +1,6 @@
-@extends('layout')
+@extends('layouts.layout')
+@section('title', 'Clients')
+@section('styles')
 
 @section('content')
 <h1>Clients</h1>
@@ -40,4 +42,6 @@
 </table>
 @endsection
 @section('scripts')
+{{ $products->links() }}
+
 <script>
